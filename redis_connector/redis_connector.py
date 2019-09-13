@@ -18,6 +18,14 @@ class RedisConnector:
         print " [ Start connect redis --- OK  ] "
         pass
 
+# COMMON------------------------
+    def keys(self, pattern):
+        return self.client.keys(pattern)
+
+    def is_exists(self, key):
+        return self.client.exists(key)
+
+# STRING-----------------------------
     def set(self, key, value):
         result = self.client.set(key, value)
         print " [ Redis Set ] key : ", key, " ; value :", value, " --- OK "
@@ -27,3 +35,34 @@ class RedisConnector:
         value = self.client.get(key)
         print "  [ Redis Get ] key : ", key, " ; value :", value, " --- OK "
         return value
+
+# HASH--------------------------
+    def hash_set(self, key, field, value):
+        result = self.client.hset(key, field, value)
+        return result
+
+    def hash_get(self, key, field):
+        value = self.client.hget(key, field)
+        return value
+
+# LIST----------------------------
+    def list_push(self, key, value):
+        result = self.client.lpush(key, value)
+        return result
+
+    def list_pop(self, key):
+        value = self.client.lpop(key)
+        return value
+
+# SET----------------------------
+    def set_add(self, key, value):
+        result = self.client.sadd(key, value)
+        return result
+
+    def set_remove(self, key, value):
+        value_result = self.client.srem(key, value)
+        return value_result
+# ZSET-----------------------------
+    def zset_add(self, key, value, score):
+        result = self.client.zadd(key, value, score)
+        return result
