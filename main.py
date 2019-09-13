@@ -1,4 +1,4 @@
-from src.dog import Dog
+from dog import Dog
 
 
 def main():
