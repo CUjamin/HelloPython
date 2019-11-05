@@ -1,3 +1,6 @@
+import logging
+
+
 class PropertiesUtils:
     # file
     config_map = {}
@@ -10,10 +13,7 @@ class PropertiesUtils:
             else:
                 key_value = line.split(':')
                 self.config_map[key_value[0]] = key_value[1].rstrip()
-        print " file name : ", file_name, "\n config : ", self.config_map
+        logging.info(" file name : ", file_name, "\n config : ", self.config_map)
 
     def get_value(self, key):
         return self.config_map.get(key)
-
-
-
